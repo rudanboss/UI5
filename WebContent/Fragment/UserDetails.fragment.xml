@@ -1,0 +1,115 @@
+<core:FragmentDefinition  xmlns="sap.m"
+    xmlns:l="sap.ui.layout"  xmlns:viz="sap.viz.ui5.controls"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:vizData="sap.viz.ui5.data" xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:f="sap.ui.layout.form" xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:core="sap.ui.core" xmlns:smartTable="sap.ui.comp.smarttable" xmlns:u="sap.ui.unified" 
+    xmlns:commons="sap.suite.ui.commons">
+	    <VBox>
+	    <HBox>
+		<VBox class="sapUiMediumMarginBeginEnd sapUiMediumMarginTop">
+		<f:SimpleForm id="SimpleFormChange" 
+			editable="false"
+			layout="ResponsiveGridLayout" 
+			adjustLabelSpan="false"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="User ID" />
+				<Text id="user_id" showValueHelp="false"
+							text="{userModel>/USER_ID}" />
+				<Label text="User Name" />
+				<Text id="user_name" 
+							 text="{userModel>/USER_NAME}"/>
+				<Label text="Tests already taken" />
+				<Text id="user_tests" 
+							 text="{userModel>/TESTS_GIVEN}"/>
+							 <Label text="User Authorization" />
+			 	<HBox>
+			 	
+						<MultiComboBox id="user_auth"
+							width="300px" selectedKeys="{userModel>/AUTH}"
+							items="{authorizeModel>/results}">
+							<core:Item key="{authorizeModel>UKEY}" text="{authorizeModel>UKEY}" />
+						</MultiComboBox>
+					<Button icon="sap-icon://save" press="onAuthorize" ariaLabelledBy="saveAuthorize"/>
+				</HBox>
+			</f:content>
+		</f:SimpleForm>
+		<f:SimpleForm id="SimpleFormChange2" class= "sapUiTinyMarginTop"
+			editable="false" 
+			layout="ResponsiveGridLayout" 
+			adjustLabelSpan="false"
+			singleContainerFullSize="false" title="Modify Progress Report">
+			<Label text="Select Set"/>
+		<Select id="ukey_teist" change="onSelectUkeyChange" 
+									selectedKey="1" items="{sampleDatajson2>/results}"  enabled="true">
+									<items>
+										<core:Item key="{sampleDatajson2>SET_NAME}" text="{sampleDatajson2>SET_NAME}" />
+									</items>
+								</Select>
+								</f:SimpleForm>	
+		</VBox>
+				<VBox class="sapUiMediumMarginEnd sapUiMediumMarginTop">
+				<commons:ChartContainer id="oChartContainer">
+				</commons:ChartContainer>
+				 <viz:Popover id="idPopOver"></viz:Popover>
+				<viz:VizFrame id="idVizFrame2" 
+                height="24rem" vizProperties="{plotArea: { drawingEffect: 'glossy' },title:{ text:'Progress Report'},zoom:{Description:'Zoom'}}" vizType='line'>
+                <viz:dataset>
+                    <viz.data:FlattenedDataset data="{sampleUserDatajson>/results}">
+                        <viz.data:dimensions>
+                            <viz.data:DimensionDefinition name="Set Name"
+                                value="{sampleUserDatajson>UKEY}" />
+                        </viz.data:dimensions>
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition name="Percentage"
+                                value="{sampleUserDatajson>PER}" />
+                        </viz.data:measures>
+                    </viz.data:FlattenedDataset>
+                </viz:dataset>
+                <viz:feeds>
+                    <viz.feeds:FeedItem id='valueAxisFeed2' uid="valueAxis" type="Measure"
+                        values="Percentage" />
+                    <viz.feeds:FeedItem id='categoryAxisFeed2' uid="categoryAxis" type="Dimension"
+                        values="Set Name" />
+                </viz:feeds>
+            </viz:VizFrame>
+				</VBox>
+            </HBox>
+            <Table id="detailsTable" class="sapUiSizeCompact sapUiMediumMarginTop" items="{detailsModel>/results}" >
+            <columns>
+			<Column>
+				<Text text="Set Name" />
+					</Column>
+					<Column>
+					<Text text="Set ID" />
+					</Column>
+					<Column>
+					<Text text="Marks" />
+					
+					</Column>
+					<Column>
+					<Text text="Status" />
+					</Column>
+		</columns>
+		<items>
+			<ColumnListItem type="Navigation" 
+            press="onUserDetailsPress">
+				<cells>
+					<Text
+						text="{detailsModel>SET_NAME}" />
+					<Text
+						text="{detailsModel>SET_ID}" />
+						<Text text="{= ${detailsModel>SCORE} === '-1' ? 'N.A' : ${detailsModel>SCORE} }"/>
+						<ObjectStatus
+				text="{= ${detailsModel>SCORE} === '-1' ? 'Pending' : 'Submitted' }"
+				state="{= ${detailsModel>SCORE} === '-1' ? 'Warning' : 'Success' }"
+				icon="{= ${detailsModel>SCORE} === '-1' ? 'sap-icon://pending' : 'sap-icon://accept' }" />
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	</VBox>
+	
+</core:FragmentDefinition>

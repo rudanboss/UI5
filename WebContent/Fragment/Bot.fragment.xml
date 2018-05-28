@@ -1,0 +1,25 @@
+<core:FragmentDefinition id="fragment23"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Popover id="pop" title="Welcome to ELAPS" class="sapUiContentPadding" resizable="true" verticalScrolling="true" contentHeight="200px"
+		placement="Bottom"
+			initialFocus="query">
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Input submit="ask" id="query" type="text" width="200px" value="" class="sapUiSmallMargin"/>
+				<Button text="Clear" press="onClear" />
+			</Toolbar>
+		</footer>
+		<VBox id="chat">
+			<FlexBox class="sapUiSmallMarginTop"
+					alignItems="Start"
+					justifyContent="Start">
+					<items>
+						<Text class="chat1" text="How may I help you?" />
+					</items>
+				</FlexBox>
+				
+		</VBox>
+	</Popover>
+</core:FragmentDefinition>

@@ -1,0 +1,87 @@
+.login
+{
+	display: inline-block; 
+	width: 10rem;
+}
+.fontSizeLarge
+{
+	font-size: 30px;
+}
+.fontSizeExtraLarge
+{
+	font-size: 50px;
+}
+.fontSizesmall
+{
+	font-size: 20px;
+}
+.whiteFontColor
+{
+	color: white !important;
+}
+.whiteFontColor span
+{
+	color: white !important;
+}
+.blackFontColor span
+{
+	color: black !important;
+}
+.background
+{
+	background-color: #edf0f5;
+}
+.Bluebackground
+{
+	background-color: #2196f3;
+}
+.sapMShellCentralBox{
+	width: 100% !important; 
+    margin-left: 0px !important; 
+    left:0 !important;
+} 
+.Input *
+{
+	border-radius: 15px !important;
+}
+.borderColor
+{
+	border-color: #009de0;
+}
+/* .sapMPopup-CTX .sapMIBar.sapMHeader-CTX
+{
+	background-color: #009de0 !important;
+} */
+.blueFontColor input
+{
+	color:green!important;
+}
+.redFontColor input
+{
+	color: red !important;
+}
+.quesAns{
+	padding:20px;
+	background-color:#bcdee8;
+	margin:20px;
+}
+.chat1{
+	background-color: #6cadec;
+    padding: 10px;
+    border-radius: 0 10px 20px 0;
+    max-width:230px;
+}
+.chat2{
+	background-color: #6cecb5;
+    padding: 10px;
+    border-radius: 10px 0 0 20px;
+    max-width:230px;
+}
+.News span {
+    color: #2f94d2;
+    font-size: 20px;
+    font-weight: bolder;
+}
+.tiles {
+    background-size: cover;
+}

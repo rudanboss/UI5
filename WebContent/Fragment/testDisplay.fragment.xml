@@ -1,0 +1,13 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core" >
+    <VBox class="sapUiLargeMarginBeginEnd sapUiSmallMarginTopBottom">
+    <f:SimpleForm id="quesAns"
+			layout="ResponsiveGridLayout"
+			editable="true">
+    </f:SimpleForm>
+    </VBox>
+    
+    </core:FragmentDefinition>

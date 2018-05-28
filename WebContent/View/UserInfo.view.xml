@@ -1,0 +1,274 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	 xmlns:l="sap.ui.layout" controllerName="ztms.Controller.UserInfo"
+	 xmlns:viz="sap.viz.ui5.controls"
+	xmlns:vizFeeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:vizData="sap.viz.ui5.data" xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:html="http://www.w3.org/1999/xhtml"  xmlns="sap.m" xmlns:smartForm="sap.ui.comp.smartform" xmlns:smartField="sap.ui.comp.smartfield"
+		   xmlns:tnt="sap.tnt" height="100%" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:smartchart="sap.ui.comp.smartchart" xmlns:sl="sap.ui.comp.navpopover" 
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:smartTable="sap.ui.comp.smarttable">
+	<core:Fragment fragmentName="ztms.fragment.login" type="XML" />
+	<tnt:ToolPage id="toolPage">
+		<tnt:header>
+			<tnt:ToolHeader> 
+				<Button id="sideNavigationToggleButton" icon="sap-icon://menu2"
+					type="Transparent" press="onCollapseExpandPress">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" />
+					</layoutData>
+				</Button>
+				<ToolbarSpacer width="20px" />
+				<ToolbarSpacer />
+				<core:Icon src="sap-icon://approvals">
+				</core:Icon>
+				<Text text="ELAPS (eLearning &amp; Progress reporting System) Test"
+					wrapping="false">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="Disappear" />
+					</layoutData>
+				</Text>
+				<ToolbarSpacer />
+				<Button text="Refresh" icon="sap-icon://synchronize" type="Transparent"
+					press="onRefresh" />
+				<Button icon="sap-icon://message-popup" press="handleMessagePopoverPress" />
+			</tnt:ToolHeader>
+		</tnt:header>
+		<tnt:sideContent>
+			<tnt:SideNavigation id = "sideNavigation" expanded="true"
+								selectedItem="Test">
+				<tnt:NavigationList>
+					<tnt:NavigationListItem text="User Profile" icon="sap-icon://employee">
+						<tnt:NavigationListItem  text="{login_check>/results/0/USER_NAME}"/>
+						<tnt:NavigationListItem  text="M&amp;A Team"/>
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem id="Dashboard" select="onSelectDashboard" text="Dashboard" icon="sap-icon://bbyd-dashboard"/>
+<!-- 					<tnt:NavigationListItem text="Test Details" icon="sap-icon://add-document"> -->
+<!-- 						<tnt:NavigationListItem  text="Add New Test"/> -->
+<!-- 					</tnt:NavigationListItem> -->
+					<tnt:NavigationListItem id="take_test" select="onTakeTest" text="Take Test"	icon="sap-icon://employee-approvals"/>
+				</tnt:NavigationList>
+				<tnt:fixedItem>
+					<tnt:NavigationList>
+<!-- 						<tnt:NavigationListItem id="Dashboard" text="Dashboard" icon="sap-icon://bbyd-dashboard" /> -->
+						<tnt:NavigationListItem id="Setting" text="Account Setting"	icon="sap-icon://action-settings" select="onSettingPress" />
+						<tnt:NavigationListItem text="Log Out" icon="sap-icon://log" select="onLogOutPress"/>
+					</tnt:NavigationList>
+				</tnt:fixedItem>
+			</tnt:SideNavigation>
+		</tnt:sideContent>
+		<tnt:mainContents>
+			<NavContainer id="navCon">
+<!-- 				<Page -->
+<!-- 				id="p1" -->
+<!-- 				title="Page 1" ><content> -->
+<!-- 				<Text text="hello"></Text> -->
+<!-- 				</content> -->
+<!-- 				<footer><Toolbar><Button text="Action 1" /></Toolbar></footer> -->
+<!-- 			</Page> -->
+			<Page
+				id="p4"
+				showHeader="false" >
+				
+			    <VBox>
+    <HBox height="19rem">
+    <viz:VizFrame xmlns="sap.viz" id="idDonutChart" vizType="donut" height="26rem"
+						vizProperties="{plotArea: { drawingEffect: 'glossy' },title:{ text:'Appeared Tests Overview'}}">
+						<viz:dataset>
+							<vizData:FlattenedDataset data="{sampleDatajson3>/results}">
+								<vizData:dimensions>
+									<vizData:DimensionDefinition name="Set Name" value="{sampleDatajson3>SET_NAME}"/>
+								</vizData:dimensions>
+								<vizData:measures>
+									<vizData:MeasureDefinition name="Score" value="{= ${sampleDatajson3>SCORE} === '-1' ? 0 : ${sampleDatajson3>SCORE} }"/>
+								</vizData:measures>
+							</vizData:FlattenedDataset>
+						</viz:dataset>
+						<viz:feeds>
+							<vizFeeds:FeedItem uid="size" type="Measure" values='Score'/>
+							<vizFeeds:FeedItem uid="color" type="Dimension" values="Set Name"/>
+						</viz:feeds>
+					</viz:VizFrame>
+					<Panel height="26rem">
+					<VBox>
+					                	<Select id="ukey_teist" change="onSelectUkeyChange" 
+									selectedKey="1" items="{sampleDatajson2>/results}"  enabled="true">
+									<items>
+										<core:Item key="{sampleDatajson2>SET_NAME}" text="{sampleDatajson2>SET_NAME}" />
+									</items>
+								</Select>
+								
+			<viz:VizFrame id="idVizFrame" height="18rem"
+                 vizProperties="{plotArea: { drawingEffect: 'glossy' },title:{ text:'Progress Report'}}" vizType='line'>
+
+                <viz:dataset>
+                    <viz.data:FlattenedDataset data="{sampleDatajson>/results}">
+                        <viz.data:dimensions>
+                            <viz.data:DimensionDefinition name="Set Name"
+                                value="{path:'UKEY',formatter:'.formatter.ukeyChange'}" />
+                        </viz.data:dimensions>
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition name="Marks"
+                                value="{= ${sampleDatajson>SCORE} === '-1' ? 0 : ${sampleDatajson>SCORE} }" />
+                            <viz.data:MeasureDefinition name="Total Marks"
+                                value="{sampleDatajson>TOTAL_MARKS}" />
+                        </viz.data:measures>
+                    </viz.data:FlattenedDataset>
+                </viz:dataset>
+
+                <viz:feeds>
+                    <viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure"
+                        values="Marks" />
+                    <viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension"
+                        values="Set Name" />
+                </viz:feeds>
+            </viz:VizFrame>
+            </VBox>
+            </Panel>
+    </HBox>
+<!--     <smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="Admin_dashSet"> -->
+<!-- 					<smartFilterBar:controlConfiguration> -->
+<!-- 						<smartFilterBar:ControlConfiguration -->
+<!-- 							key="EDATE"  controlType="date" visibleInAdvancedArea="true"> -->
+<!-- 						</smartFilterBar:ControlConfiguration> -->
+<!-- 					</smartFilterBar:controlConfiguration> -->
+<!-- 				</smartFilterBar:SmartFilterBar> -->
+				<smartTable:SmartTable id="smartid" 
+				
+					initiallyVisibleFields="SET_ID,SET_NAME,SCORE,TOTAL_MARKS"
+					entitySet="User_dashSet"
+					tableType="ResponsiveTable"  beforeRebindTable="onBeforeRebindTable" useVariantManagement="false"
+					useExportToExcel="true" useTablePersonalisation="true"
+					header="Recent Test Details" showRowCount="true" demandPopin="true"
+					enableAutoBinding="true" class="sapUiSmallMarginTop">
+					<Table mode="MultiSelect" class="sapUiSizeCompact" growing="true" id="table">
+					<columns>
+						<Column width="100px" hAlign="Begin">
+							<customData>
+								<core:CustomData key="p13nData"
+									value='\{ "columnKey": "SCORE","maxLength": "4","columnIndex":"3", "leadingProperty": "SCORE"}' />
+							</customData>
+							<Text text="Score"/>
+						</Column>
+					</columns>
+
+					<items>
+						<ColumnListItem>
+							<!-- <cells> -->					
+							<cells>
+					<ObjectStatus
+				text="{= ${SCORE} === '-1' ? 'Pending' : ${SCORE} }"
+				state="{= ${SCORE} === '-1' ? 'Warning' : 'Success' }"
+				icon="{= ${SCORE} === '-1' ? 'sap-icon://pending' : 'sap-icon://accept' }" />
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+					</smartTable:SmartTable>
+	</VBox>
+	</Page>
+			<Page
+				id="p2"
+				showHeader="false" ><content>
+				<smartForm:SmartForm id="smartForm" entityType="UserSet"
+				class="sapUiMediumMargin"
+				editTogglable="false" editable="{oModelEditable>/editable}">
+				<smartForm:customToolbar>
+					<OverflowToolbar design="Transparent">
+						<ToolbarSpacer />
+						<Button id="idEdit" icon="sap-icon://edit"
+							hideText="false" press="onEdit" enabled="true" tooltip="Edit" visible="{oModelEditable>/visible}"/>
+						<Button id="update" hideText="false"
+							icon="sap-icon://save" visible="{oModelEditable>/invisible}"
+							press="onSave" tooltip="Save"/>
+						<Button id="idCancel" hideText="false"
+							icon="sap-icon://sys-cancel" enabled="true"
+							press="onCancel" tooltip="Cancel" visible="{oModelEditable>/invisible}"/>
+					</OverflowToolbar>
+				</smartForm:customToolbar>
+				<smartForm:Group >
+					<smartForm:GroupElement>
+						<smartField:SmartField id="user_id" showValueHelp="false"
+							value="{USER_ID}">
+						</smartField:SmartField>
+					</smartForm:GroupElement>
+					<smartForm:GroupElement>
+						<smartField:SmartField id="user_name" 
+							 value="{USER_NAME}" />
+					</smartForm:GroupElement>			
+				</smartForm:Group>
+			</smartForm:SmartForm>
+				</content>
+				<footer><Toolbar><Button text="Action 2" /></Toolbar></footer>
+			</Page>
+			<Page id="p3" showHeader="false">
+			<HBox class="sapUiMediumMarginBegin sapUiSmallMarginTopBottom">
+			<Select id="test_ukey" change="onSelectChange" 
+				placeholder="Select a Topic" width="15rem" items="{auth_model>/results}"  enabled="true">
+									<items>
+										<core:Item key="{auth_model>AUTH}" text="{auth_model>AUTH}" />
+									</items>
+								</Select>
+								<FormattedText class= "sapUiLargeMarginBegin" htmlText="{html_model>/HTML}" id="html_link"/>
+								<Text class= "sapUiSmallMarginBegin"  text="{set_model>/results/0/TOTAL_MARKS}"/>
+								<FormattedText class= "sapUiLargeMarginBegin" htmlText="{html_model>/HTML2}" id="html_link2"/>
+								<Text class= "sapUiSmallMarginBegin" text="{set_model>/results/0/MAX_TIME}"/>
+														<Button class= "sapUiLargeMarginBegin" id="proceed" hideText="true" text="Proceed"
+							icon="sap-icon://open-command-field" visible="true"
+							press="onProceedCheck" tooltip="Proceed to test" type="Emphasized">
+								<layoutData>
+				<OverflowToolbarLayoutData
+					priority="NeverOverflow"/>
+			</layoutData></Button>	
+								</HBox>
+								<VBox>
+								<Panel>
+								<FormattedText htmlText="{html_model>/HTML3}" id="html_link3"/>
+<!-- 								<Button id="proceed" hideText="true" text="Proceed" -->
+<!-- 							icon="sap-icon://open-command-field" visible="true" -->
+<!-- 							press="onProceed" tooltip="Proceed to test" type="Emphasized"> -->
+<!-- 								<layoutData> -->
+<!-- 				<OverflowToolbarLayoutData -->
+<!-- 					priority="NeverOverflow"/> -->
+<!-- 			</layoutData></Button> -->
+				
+							</Panel> 
+								</VBox>
+								</Page>
+								<Page id="p5" showHeader="false">
+								<core:Fragment fragmentName="ztms.fragment.UserAccountSetting" type="XML" />
+								</Page>
+			<!-- <VBox> 	
+			<smartFilterBar:SmartFilterBar id="smartFilterBar"
+				entityType="Products" persistencyKey="SmartFilter_Explored">
+				<smartFilterBar:controlConfiguration>
+					<smartFilterBar:ControlConfiguration
+						key="ProductName">
+						<smartFilterBar:defaultFilterValues>
+							<smartFilterBar:SelectOption>
+							</smartFilterBar:SelectOption>
+						</smartFilterBar:defaultFilterValues>
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration
+						key="SupplierID">
+						<smartFilterBar:defaultFilterValues>
+							<smartFilterBar:SelectOption>
+							</smartFilterBar:SelectOption>
+						</smartFilterBar:defaultFilterValues>
+					</smartFilterBar:ControlConfiguration>
+				</smartFilterBar:controlConfiguration>
+			</smartFilterBar:SmartFilterBar>
+			<sap.ui.comp.smarttable:SmartTable
+				xmlns:sap.ui.comp.smarttable="sap.ui.comp.smarttable" tableType="ResponsiveTable"
+				header="Previous Tests Created" enableAutoBinding="true" id="table"
+				smartFilterId="smartFilterBar" entitySet="Products"
+				initiallyVisibleFields="ProductName,SupplierID,CategoryID">
+				<Table id="innerUi5Table" growing="true">
+					<ColumnListItem
+						highlight="{path:'CategoryID', formatter:'.formatRowHighlight'}" />
+				</Table>
+			</sap.ui.comp.smarttable:SmartTable>
+			</VBox> -->
+			</NavContainer>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+</core:View>

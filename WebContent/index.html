@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+      <head>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+
+            <script src="https://sapui5.netweaver.ondemand.com/resources/sap-ui-core.js"
+                        id="sap-ui-bootstrap"
+                        data-sap-ui-libs="sap.m"
+                        data-sap-ui-theme="sap_bluecrystal"
+                        data-sap-ui-bindingSyntax="complex"
+                        data-sap-ui-resourceroots='{"ztms": "./"}'>
+            </script>
+            <!-- only load the mobile lib "sap.m" and the "sap_bluecrystal" theme -->
+<script type="text/javascript" src="js/xlsx.full.min.js"></script>
+            <script>
+     sap.ui.getCore().attachInit(function () {
+        new sap.m.Shell({
+          app: new sap.ui.core.ComponentContainer({
+            name: "ztms"
+          })
+        }).placeAt("content");
+      });
+
+    </script>
+    
+<!-- <script type="text/javascript">
+        window.oncontextmenu = function () {
+            return false;
+        }
+        $(document).keydown(function (event) {
+            if (event.keyCode == 123) {
+                return false;
+            }
+            else if ((event.ctrlKey && event.shiftKey && event.keyCode == 73) || (event.ctrlKey && event.shiftKey && event.keyCode == 74)) {
+                return false;
+            }
+        });
+    </script> -->
+    
+      </head>
+      <body class="sapUiBody" role="application">
+            <div id="content"></div>
+      </body>
+</html>

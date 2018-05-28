@@ -1,0 +1,80 @@
+<mvc:View controllerName="ztms.Controller.Main" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:layout="sap.ui.layout"
+	xmlns:microchart="sap.suite.ui.microchart" xmlns:core="sap.ui.core" >
+	<Page class="background" showHeader="false" >
+	<core:Fragment fragmentName="ztms.Fragment.login" type="XML" />
+		<OverflowToolbar class="Bluebackground " height="5rem">
+			<Label class="fontSizeLarge whiteFontColor" textAlign="Center" 
+				text="{i18n>ELAPS}" design="Bold" />
+		</OverflowToolbar>
+		
+		<l:Grid defaultSpan="L6 M12 S12" class="sapUiSmallMarginTop">
+			<l:content>
+				<HBox class="sapUiMediumMarginBottom">
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+						header="{i18n>Admin}" subheader="{i18n>ClickLogin}" press="handleTile1">
+						<tileContent>
+							<TileContent>
+								<content>
+									<ImageContent src="sap-icon://customer-and-contacts" />
+								</content>
+							</TileContent>
+						</tileContent>
+					</GenericTile>
+					<GenericTile  id="student_login" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+						header="{i18n>User}"  subheader="{i18n>ClickLogin}" press="handleTile2">
+						<tileContent>
+							<TileContent>
+								<content>
+									<ImageContent src="sap-icon://account" />
+								</content>
+							</TileContent>
+						</tileContent>
+					</GenericTile>
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+						header="{i18n>goCoding}" subheader="{i18n>getStarted}" press="handleTile3">
+						<tileContent>
+							<TileContent>
+								<content>
+									<ImageContent src="sap-icon://learning-assistant" />
+								</content>
+							</TileContent>
+						</tileContent>
+					</GenericTile>
+				</HBox>
+				<VBox>
+					<Label class="fontSizeLarge" text="{i18n>Register}"
+						design="Bold" />
+					<Label class="fontSizesmall" text="{i18n>Learning}" />
+					<Input class="Input" placeholder="{i18n>EMPID}" width="25rem"
+						type="Number" tooltip="{i18n>EmplyeeId}" id="user_id" submit="onRegister"/>
+					<Input class="Input" placeholder="{i18n>Name}" width="25rem"
+						tooltip="{i18n>WhatName}" id="user_name" submit="onRegister"/>
+					<Input class="Input" placeholder="{i18n>newPass}" width="25rem"
+						type="Password" tooltip="{i18n>EnterPass}" id="password" submit="onRegister"/>
+					<Input class="Input" placeholder="{i18n>confirmPass}" width="25rem"
+						type="Password" tooltip="{i18n>EnterpassAgain}" id="password2" submit="onRegister"/>
+							<HBox>
+<!-- 							<Switch state="true" customTextOn="M" tooltip="{i18n>gender}" customTextOff="F"/> -->
+<SegmentedButton selectedKey="Male" width="18rem">
+					<items>
+						<SegmentedButtonItem text="Male" key="Male" icon="sap-icon://employee" />
+						<SegmentedButtonItem icon="sap-icon://wounds-doc" text="Female" />
+					</items>
+				</SegmentedButton>
+							<MessageStrip
+							class="sapUiTinyMargin"
+				id = "id_signInError"
+				text="All Fields are mandatory"
+				type="Error"
+				showIcon="true"
+				showCloseButton="true"
+				visible = "false">
+			</MessageStrip></HBox>
+							<Button type="Accept" width="15rem" text="{i18n>createAccount}" press="onRegister"/>
+				</VBox>
+			</l:content>
+		</l:Grid>
+		<footer><Toolbar  ><Button text="About us" press="onAbout"/><Button text="Terms" press="onTerms"/><Button text="Help" press="onHelp"/><ToolbarSpacer width="20rem" /><Text align="center" text="© A Team Fiori Production"  /></Toolbar></footer>
+	</Page>
+</mvc:View>

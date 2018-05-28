@@ -1,0 +1,41 @@
+<core:FragmentDefinition  xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:core="sap.ui.core" xmlns:smartTable="sap.ui.comp.smarttable" xmlns:u="sap.ui.unified">>
+	    <VBox>
+    <smartFilterBar:SmartFilterBar id="smartFilterBar51" entitySet="UserSet">
+					<smartFilterBar:controlConfiguration>
+						<smartFilterBar:ControlConfiguration
+							key="USER_ID"   visibleInAdvancedArea="true">
+						</smartFilterBar:ControlConfiguration>
+						<smartFilterBar:ControlConfiguration
+							key="USER_NAME"  visibleInAdvancedArea="true">
+						</smartFilterBar:ControlConfiguration>
+					</smartFilterBar:controlConfiguration>
+				</smartFilterBar:SmartFilterBar>
+				<smartTable:SmartTable id="smartid51" entitySet ="UserSet"
+					smartFilterId="smartFilterBar51" 
+					initiallyVisibleFields="USER_ID,USER_NAME,TESTS_GIVEN"
+					tableType="ResponsiveTable"  useVariantManagement="false"
+					useExportToExcel="true" useTablePersonalisation="true"
+					header="All User Details" showRowCount="true" demandPopin="true"
+					enableAutoBinding="true" class="sapUiSmallMarginTop">
+						<smartTable:customToolbar>
+				<OverflowToolbar design="Transparent">
+					<ToolbarSpacer />
+						<Button id="authButton" icon="sap-icon://shield" 
+						tooltip="{i18n>authorize}" press="authorizePress" />
+				</OverflowToolbar>
+			</smartTable:customToolbar>
+					<Table id="table" growing="true" mode="MultiSelect" selectionChange="onSelect" class="sapUiSizeCompact">
+					<columns >
+					</columns>
+					<items>
+						<ColumnListItem type="Navigation" press="onUserPress">
+						</ColumnListItem>
+						</items>
+						</Table>
+						</smartTable:SmartTable>
+	</VBox>
+</core:FragmentDefinition>

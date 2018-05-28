@@ -1,0 +1,30 @@
+<core:FragmentDefinition  xmlns="sap.m"
+    xmlns:l="sap.ui.layout"  xmlns:viz="sap.viz.ui5.controls"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:vizData="sap.viz.ui5.data" xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:f="sap.ui.layout.form" xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:core="sap.ui.core" xmlns:smartTable="sap.ui.comp.smarttable" xmlns:u="sap.ui.unified">
+	    <VBox>
+			<List
+		items="{testPress>/results}"
+		headerText="{}">
+		<items>
+			<ObjectListItem
+				title="Ques. {testPress>QNAME}"
+				intro="Q.no. {testPress>QID}"
+				number="{testPress>MARKS} marks">
+				<attributes>
+					<ObjectAttribute title= "Option 1" text="{testPress>A1}" visible="{=${testPress>A1}=== '' ? false : true}"/>
+					<ObjectAttribute title= "Option 2" text="{testPress>A2}" visible="{=${testPress>A2}=== '' ? false : true}"/>
+					<ObjectAttribute title= "Option 3" text="{testPress>A3}" visible="{=${testPress>A3}=== '' ? false : true}"/>
+					<ObjectAttribute title= "Option 4" text="{testPress>A4}" visible="{=${testPress>A4}=== '' ? false : true}"/>
+					<ObjectAttribute title= "MCQ Ans" text="{testPress>A}" visible="{=${testPress>A}=== '' ? false : true}"/>
+					<ObjectAttribute title= "Descriptive Answer" text="{testPress>ANS}" visible="{=${testPress>ANS}=== '' ? false : true}"/>
+				</attributes>
+			</ObjectListItem>
+		</items>
+	</List>
+	</VBox>
+	
+</core:FragmentDefinition>

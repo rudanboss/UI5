@@ -1,0 +1,111 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout" controllerName="ztms.Controller.Admin"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" xmlns:tnt="sap.tnt"
+	height="100%" xmlns:smartchart="sap.ui.comp.smartchart" xmlns:sl="sap.ui.comp.navpopover"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:smartTable="sap.ui.comp.smarttable">
+	<core:Fragment fragmentName="ztms.Fragment.AddSet" type="XML" />
+	<tnt:ToolPage id="toolPage">
+		<tnt:header>
+			<tnt:ToolHeader>
+				<Button id="sideNavigationToggleButton" icon="sap-icon://menu2"
+					type="Transparent" press="onCollapseExpandPress">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" />
+					</layoutData>
+				</Button>
+				<ToolbarSpacer width="20px" />
+				<ToolbarSpacer />
+				<core:Icon src="sap-icon://approvals">
+				</core:Icon>
+				<Text text="{i18n>ELAPS}" wrapping="false">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="Disappear" />
+					</layoutData>
+				</Text>
+				<ToolbarSpacer />
+				<Button text="{i18n>Refresh}" icon="sap-icon://synchronize" type="Transparent"
+					press="onRefresh" />
+				<Button icon="sap-icon://message-popup" press="handleMessagePopoverPress" />
+			</tnt:ToolHeader>
+		</tnt:header>
+		<tnt:sideContent>
+			<tnt:SideNavigation id="sideNavigation" expanded="true"
+				selectedItem="Dashboard">
+				<tnt:NavigationList>
+					<tnt:NavigationListItem text="ADMIN"
+						icon="sap-icon://employee">
+						<tnt:NavigationListItem text="{login_check>/results/0/NAME}" hasExpander="false"/>
+						<tnt:NavigationListItem text="{login_check>/results/0/TEAM}" />
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem id="Dashboard" text="{i18n>Dashboard}"
+						icon="sap-icon://bbyd-dashboard" select="onSelectDashboard"/>
+					<tnt:NavigationListItem id="id_Test"  text="{i18n>TestDetails}"
+						icon="sap-icon://detail-view" select="onSelectTest"/>
+					<tnt:NavigationListItem id="id_newTest" text="{i18n>AddTest}"
+					icon="sap-icon://add-document" select="onSelectnewTest"/>
+					<tnt:NavigationListItem id="Users" text="{i18n>Users}" icon="sap-icon://employee-approvals" 
+					select="onSelectUsers"/>
+				</tnt:NavigationList>
+				<tnt:fixedItem>
+					<tnt:NavigationList>
+						<tnt:NavigationListItem id="Setting"
+							text="{i18n>AccountSetting}" icon="sap-icon://action-settings" select="onSelectSetting"/>
+						<tnt:NavigationListItem text="{i18n>LogOut}" icon="sap-icon://log" select="onSelectLogOut"/>
+					</tnt:NavigationList>
+				</tnt:fixedItem>
+			</tnt:SideNavigation>
+		</tnt:sideContent>
+		<tnt:mainContents>
+			<NavContainer id="navCon">
+			<Page id="p_dashboard" title="{i18n>Dashboard}" >
+			<core:Fragment fragmentName="ztms.fragment.AdminDashboard" type="XML" />
+			</Page>
+			<Page id="p_testDetails" title="{i18n>TestDetails}" >
+			<core:Fragment fragmentName="ztms.fragment.TestDetails" type="XML" />
+			</Page>
+			<Page id="p_addTest" title="{i18n>AddTest}" >
+			<headerContent>
+			<Button icon="sap-icon://upload-to-cloud" Align="Right" text="Upload Questionnaire"
+				type="Transparent" press="onUploadQues"/>
+				<Button icon="sap-icon://download-from-cloud" Align="Right" text="Download Questionnaire Template"
+				type="Transparent" press="onPressDownload"/>
+			<Button icon="sap-icon://add" Align="Right" text="Add Question"
+				type="Transparent" press="onCreateQues"/>
+				<Button icon="sap-icon://save" Align="Right" text="Save"
+				type="Transparent" press="onSaveQues"/>
+		</headerContent>
+			<core:Fragment fragmentName="ztms.fragment.AddTest" type="XML" />
+			</Page>
+			<Page id="p_users" showHeader="false" showSubHeader="false">
+			<NavContainer id="navCon2">
+			<Page id="p_users_2" title="{i18n>Users}" >
+			<core:Fragment fragmentName="ztms.fragment.Users" type="XML" />
+			</Page>
+			<Page id="p_users_details" title="User Details" showNavButton = "true" navButtonPress="onProfiles">
+			<core:Fragment fragmentName="ztms.fragment.UserDetails" type="XML" />
+			</Page>
+			</NavContainer>
+			</Page>
+			<Page id="p_test_details" title="Test Details" showNavButton = "true" navButtonPress="onTest">
+			<core:Fragment fragmentName="ztms.fragment.SetDetails" type="XML" />
+			</Page>
+			<Page id="p_accountSetting" title="{i18n>AccountSetting}" >
+			<headerContent>
+			<Button icon="sap-icon://upload-to-cloud" Align="Right" text="Upload Topics"
+				type="Transparent" press="onUploadTopics"/>
+				</headerContent>
+			<core:Fragment fragmentName="ztms.fragment.AccountSetting" type="XML" />
+			</Page>
+			<Page id="testDisplay" title="{i18n>TestDetails}" showNavButton = "true" navButtonPress="onUserDetails">
+			<core:Fragment fragmentName="ztms.fragment.testDisplay" type="XML" />
+				<footer>
+			<OverflowToolbar id="otbFooter">
+			<ToolbarSpacer/>
+			<VBox id="footerV"></VBox>
+			</OverflowToolbar>
+		</footer>
+			</Page>
+			</NavContainer>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+</core:View>

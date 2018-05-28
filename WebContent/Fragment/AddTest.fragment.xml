@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:u="sap.ui.unified" xmlns:tnt="sap.tnt">
+	<OverflowToolbar id="otb1">
+	<HBox>
+	<Input class="sapUiMediumMarginEnd blueFontColor" tooltip = "Set Name is non Editable" id="label_setName" editable = "false"/>
+	<Input class="sapUiMediumMarginEnd blueFontColor" tooltip = "Set ID is non Editable" id="label_setID" editable = "false"/>
+	<Input class="sapUiMediumMarginEnd redFontColor"  tooltip = "Max Time is non Editable" id="label_maxTime" editable = "false"/>
+	</HBox>	
+	</OverflowToolbar>
+	<VBox id="id_test">
+	</VBox>
+</core:FragmentDefinition>

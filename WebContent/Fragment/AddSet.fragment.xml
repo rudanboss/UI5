@@ -1,0 +1,87 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:u="sap.ui.unified"
+	xmlns:core="sap.ui.core">
+		<Dialog id="AddSet" title="Add A New Set" draggable="true">
+		<VBox>
+		<MessageStrip
+				id = "id_error"
+				text="SET ID already Exist!!!"
+				type="Error"
+				showIcon="true"
+				showCloseButton="true"
+				visible = "false">
+			</MessageStrip>
+			<MessageStrip
+				id = "id_error_mandt"
+				text="All Fields are Mandatory!!!"
+				type="Error"
+				showIcon="true"
+				showCloseButton="true"
+				visible = "false">
+			</MessageStrip>
+		<Input id="id_setName" placeholder="Enter Set Name" required="true" />
+		<Input id="id_setID" type="Number" placeholder="Enter Set ID" required="true" />
+		<Input id="id_maxTime" type="Number" placeholder="Enter Max Time(in Minutes)" required="true" />
+		<ComboBox id="id_comboitem" placeholder="Select Type of Questions" width="15rem">
+			<items>
+			<core:Item key="O" text="Only MCQ Questions" />
+			<core:Item key="S" text="Only Subjective Questions" />
+			<core:Item key="M" text="Mixed Questions" />
+			</items>
+			</ComboBox>
+		<HBox>
+		<Button class="sapUiTinyMarginEnd" text="Add Set" press="onAddSet" />
+		<Button text="Cancel" press="onCancelDialog" />
+		</HBox>
+		</VBox>
+		</Dialog>
+		<Dialog id="AddQues" title="Add Questionnaire" draggable="true">
+		<VBox>
+		<MessageStrip
+				id = "id_uploadError"
+				text="Upload Valid File!!!"
+				type="Error"
+				showIcon="true"
+				showCloseButton="true"
+				visible = "false">
+			</MessageStrip>
+		<HBox>
+					<Label text="File Uploader" class="sapUiSmallMargin" />
+					<u:FileUploader id="Loadfile" name="myFileUpload"
+						uploadUrl="upload/" width="70%"
+						change="onPressUpload" typeMissmatch="handleTypeMissmatch"
+						style="Emphasized" fileType="xlsx" class="sapUiSmallMarginEnd"
+						placeholder="Click to Upload File">
+					</u:FileUploader>
+					<Button icon="sap-icon://cancel" press="onCancelQues"
+						text="Cancel" ariaLabelledBy="actionButtonLabel"
+						enabled="true" type="Transparent" />
+				</HBox>
+		
+		</VBox>
+		</Dialog>
+			<Dialog id="AddTopics" title="Add Topics" draggable="true">
+		<VBox>
+		<MessageStrip
+				id = "id_uploadError1"
+				text="Upload Valid File!!!"
+				type="Error"
+				showIcon="true"
+				showCloseButton="true"
+				visible = "false">
+			</MessageStrip>
+		<HBox>
+					<Label text="File Uploader" class="sapUiSmallMargin" />
+					<u:FileUploader id="Loadfile1" name="myFileUpload"
+						uploadUrl="upload/" width="70%" 
+						change="onPressUploadTopics" typeMissmatch="handleTypeMissmatch"
+						style="Emphasized" fileType="xlsx" class="sapUiSmallMarginEnd"
+						placeholder="Click to Upload File">
+					</u:FileUploader>
+					<Button id="loadtmp_downloadTB" icon="sap-icon://cancel" press="onPressCancel"
+						text="Cancel" ariaLabelledBy="actionButtonLabel"
+						enabled="true" type="Transparent" />
+				</HBox>
+		
+		</VBox>
+		</Dialog>
+</core:FragmentDefinition>

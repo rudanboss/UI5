@@ -1,0 +1,31 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+	multiSelect= "true"
+		noDataText="No Sets Found"
+		title="Select Sets"
+		search="handleSearch"
+		confirm="handleClose1"
+		cancel="handleClose1"
+		items="{authMultiModel>/results}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{authMultiModel>SET_ID}" />
+				<Text text="{authMultiModel>SET_NAME}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Set Id" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Set Name" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

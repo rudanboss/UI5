@@ -1,0 +1,74 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:viz="sap.viz.ui5.controls"
+	xmlns:vizFeeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:vizData="sap.viz.ui5.data"
+	xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:core="sap.ui.core" xmlns:smartTable="sap.ui.comp.smarttable" xmlns:u="sap.ui.unified">
+    <VBox>
+     <Panel>
+    <HBox height="19rem">
+					<viz:VizFrame id="idVizFrame" 
+                height='19rem' width="35rem" vizType='vertical_bullet' vizProperties="{plotArea: { drawingEffect: 'glossy' },title:{ text:'Test Overview'}}">
+                <viz:dataset>
+                    <vizData:FlattenedDataset data="{sampleDatajson>/results}">
+                        <vizData:dimensions>
+                            <vizData:DimensionDefinition name="Set Name"
+                                value="{sampleDatajson>SET_NAME}" />
+                        </vizData:dimensions>
+                        <vizData:measures>
+                        
+                            <vizData:MeasureDefinition name="Attempts"
+                                value="{sampleDatajson>ATTEMPTS}" />
+                        </vizData:measures>
+                    </vizData:FlattenedDataset>
+                </viz:dataset>
+
+                <viz:feeds>
+                    <viz.feeds:FeedItem id="feedActualValues" uid="actualValues" type="Measure"
+                        values="Attempts" />
+                    <viz.feeds:FeedItem id="feedCategoryAxis" uid="categoryAxis" type="Dimension"
+                        values="Set Name" />
+                </viz:feeds>
+            </viz:VizFrame>
+            
+                <viz:VizFrame xmlns="sap.viz" id="idDonutChart" vizType="donut" height="19rem" width="35rem"
+						vizProperties="{plotArea: { drawingEffect: 'glossy' },title:{ text:'Recent Test Details'}}">
+						<viz:dataset>
+							<vizData:FlattenedDataset data="{samplepiejson>/results}">
+								<vizData:dimensions>
+									<vizData:DimensionDefinition name="SetName" value="{samplepiejson>SET_NAME}"/>
+								</vizData:dimensions>
+								<vizData:measures>
+									<vizData:MeasureDefinition name="Attempts" value="{samplepiejson>ATTEMPTS}"/>
+								</vizData:measures>
+							</vizData:FlattenedDataset>
+						</viz:dataset>
+						<viz:feeds>
+							<vizFeeds:FeedItem uid="size" type="Measure" values='Attempts'/>
+							<vizFeeds:FeedItem uid="color" type="Dimension" values="SetName"/>
+						</viz:feeds>
+					</viz:VizFrame>
+    </HBox>
+    </Panel>
+    <smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="Admin_dashSet">
+					<smartFilterBar:controlConfiguration>
+						<smartFilterBar:ControlConfiguration
+							key="EDATE"  controlType="date" visibleInAdvancedArea="true">
+						</smartFilterBar:ControlConfiguration>
+					</smartFilterBar:controlConfiguration>
+				</smartFilterBar:SmartFilterBar>
+				<smartTable:SmartTable id="smartid" 
+					smartFilterId="smartFilterBar"  beforeRebindTable="onBeforeRebindTable"
+					initiallyVisibleFields="EDATE,USER_NAME,SET_NAME,SET_ID,SCORE"
+					entitySet="Admin_dashSet"
+					tableType="ResponsiveTable"  useVariantManagement="false"
+					useExportToExcel="true" useTablePersonalisation="true"
+					header="Recent Test Details" showRowCount="true" demandPopin="true"
+					enableAutoBinding="true" class="sapUiSmallMarginTop"/>
+	</VBox>
+</core:FragmentDefinition>

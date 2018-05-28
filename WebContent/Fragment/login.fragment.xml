@@ -1,0 +1,69 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+		<Dialog id="Asignin"  title="{i18n>AdminsignIn}" draggable="true">
+		<VBox class="blackFontColor">
+		<Label text="{i18n>EID}" required="true" />
+		<Input id="idu_admin" required="true" submit="onASignin"/>
+		<Label text="{i18n>pass}" required="true" />
+		<Input id="idp_admin" type = "Password"  submit="onASignin"/>
+		<HBox>
+		<Button class="sapUiTinyMarginEnd" text="Sign In" press="onASignin" />
+		<Button text="Cancel" press="onCancel" />
+		</HBox>
+		</VBox>
+		</Dialog>
+		<Dialog id="Usignin"  title="{i18n>UsersignIn}" draggable="true">
+		<VBox class="blackFontColor">
+		<Label text="{i18n>EID}" required="true" />
+		<Input id="idu_user" required="true" submit="onUSignin"/>
+		<Label text="{i18n>pass}" required="true" />
+		<Input id="idp_user" type = "Password"  submit="onUSignin"/>
+		<HBox>
+		<Button class="sapUiTinyMarginEnd" text="{i18n>signIn}" press="onUSignin" />
+		<Button text="{i18n>cancel}" press="onCancel" />
+		</HBox>
+		</VBox>
+		</Dialog>
+		
+		<Dialog id="timer" title="{dialogModel>/attempts}">
+		<Text text="{dialogModel>/text}" id="timer_text"></Text>
+		</Dialog>
+		
+		<Dialog id="score" title="Your Score">
+		<VBox class="blackFontColor">
+		<HBox>
+		<FormattedText htmlText="{scoreModel>/HTML}"/>
+		<Text text="{scoreModel>/TEXT}" id="score_text"></Text>
+		</HBox>
+		<Button class="sapUiTinyMarginEnd" text="Ok" press="onOk" />
+		</VBox>
+		</Dialog>
+		
+		<Dialog id="subjective" title="ThankYou">
+		<VBox class="blackFontColor">
+		<Text text="ThankYou for giving the test. Your answers has been saved." id="subjective_text2"></Text>
+		<Button class="sapUiTinyMarginEnd" text="Ok" press="onOk" />
+		</VBox>
+		</Dialog>
+		
+		<Dialog id="ProceedCheck" title="Confirmation">
+		<VBox class="blackFontColor">
+		<CheckBox text="I have read all the terms and condition and I accept that I will follow all the rules." selected="false" />	
+		<HBox><Button class="sapUiTinyMarginEnd" text="I Accept" press="onAccept" />
+		<Button class="sapUiTinyMarginEnd" text="Decline" press="onDecline" />
+		</HBox>
+		</VBox>
+		
+		</Dialog>
+		<Dialog id="userPassword" title="Change Password">
+		<Label text="Enter Old Password"  required="true" />
+		<Input id="id1" type="Password" />
+		<Label text="Enter New Password" />
+		<Input id="id2" type="Password" />
+		<HBox>	<Button id="iderror1" icon="sap-icon://error" text="All Fields are Mandatory" visible="false" /></HBox>
+		<Button text="Show Password" id="id3" type="Transparent" press="onShowPassword" />
+		<Button text="Save" press="onSavePassword" />
+		<Button text="Cancel" press="onCancelPassword" />
+	</Dialog>
+		
+</core:FragmentDefinition>
